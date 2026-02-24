@@ -1,0 +1,104 @@
+{
+  "name": "getTemplateFields",
+  "label": "Get Template Fields",
+  "description": "Retrieve all fillable fields from a PDF template. Use this to discover field IDs and aliases for filling PDFs.",
+  "type": "search",
+  "connection": "anvil",
+  "communication": {
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+      "query": "query GetCast($eid: String!) { cast(eid: $eid) { eid name createdAt updatedAt isArchived versionNumber fields { id label type aliasId format required } } }",
+      "variables": {
+        "eid": "{{parameters.templateId}}"
+      }
+    },
+    "response": {
+      "iterate": "{{body.data.cast.fields}}",
+      "output": {
+        "fieldId": "{{item.id}}",
+        "label": "{{item.label}}",
+        "type": "{{item.type}}",
+        "aliasId": "{{item.aliasId}}",
+        "format": "{{item.format}}",
+        "required": "{{item.required}}",
+        "templateId": "{{body.data.cast.eid}}",
+        "templateName": "{{body.data.cast.name}}"
+      },
+      "error": {
+        "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to get template fields'))))}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.headers.Authorization"
+      ]
+    }
+  },
+  "parameters": [
+    {
+      "name": "templateId",
+      "label": "PDF Template ID",
+      "type": "text",
+      "required": true,
+      "help": "The EID of the PDF template (Cast) to retrieve fields from",
+      "mappable": true
+    }
+  ],
+  "interface": [
+    {
+      "name": "fieldId",
+      "label": "Field ID",
+      "type": "text"
+    },
+    {
+      "name": "label",
+      "label": "Field Label",
+      "type": "text"
+    },
+    {
+      "name": "type",
+      "label": "Field Type",
+      "type": "text"
+    },
+    {
+      "name": "aliasId",
+      "label": "Alias ID",
+      "type": "text"
+    },
+    {
+      "name": "format",
+      "label": "Format",
+      "type": "text"
+    },
+    {
+      "name": "required",
+      "label": "Required",
+      "type": "boolean"
+    },
+    {
+      "name": "templateId",
+      "label": "Template ID",
+      "type": "text"
+    },
+    {
+      "name": "templateName",
+      "label": "Template Name",
+      "type": "text"
+    }
+  ],
+  "samples": {
+    "fieldId": "field1",
+    "label": "Employee Name",
+    "type": "fullName",
+    "aliasId": "employeeName",
+    "format": null,
+    "required": true,
+    "templateId": "kA6Da9CuGqUtc6QiBDRR",
+    "templateName": "Employment Agreement"
+  }
+}

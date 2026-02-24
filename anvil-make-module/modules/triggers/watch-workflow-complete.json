@@ -1,0 +1,110 @@
+{
+  "name": "watchWorkflowComplete",
+  "label": "Watch Workflow Complete",
+  "description": "Triggers when an entire workflow is completed (all forms filled and signatures collected).",
+  "type": "trigger",
+  "connection": "anvil",
+  "webhook": "workflowComplete",
+  "communication": {},
+  "parameters": [],
+  "interface": [
+    {
+      "name": "weldDataId",
+      "label": "Submission ID",
+      "type": "text"
+    },
+    {
+      "name": "isComplete",
+      "label": "Is Complete",
+      "type": "boolean"
+    },
+    {
+      "name": "isTest",
+      "label": "Is Test",
+      "type": "boolean"
+    },
+    {
+      "name": "status",
+      "label": "Status",
+      "type": "text"
+    },
+    {
+      "name": "weldEid",
+      "label": "Workflow ID",
+      "type": "text"
+    },
+    {
+      "name": "weldName",
+      "label": "Workflow Name",
+      "type": "text"
+    },
+    {
+      "name": "weldSlug",
+      "label": "Workflow Slug",
+      "type": "text"
+    },
+    {
+      "name": "documents",
+      "label": "Documents",
+      "type": "array",
+      "spec": {
+        "type": "collection",
+        "spec": [
+          {
+            "name": "type",
+            "type": "text"
+          },
+          {
+            "name": "url",
+            "type": "url"
+          }
+        ]
+      }
+    },
+    {
+      "name": "submissions",
+      "label": "Submissions",
+      "type": "array",
+      "spec": {
+        "type": "collection",
+        "spec": [
+          {
+            "name": "eid",
+            "type": "text"
+          },
+          {
+            "name": "status",
+            "type": "text"
+          }
+        ]
+      }
+    },
+    {
+      "name": "completedAt",
+      "label": "Completed At",
+      "type": "date"
+    }
+  ],
+  "samples": {
+    "weldDataId": "GHEJsCVWsR1vtCx3WtUI",
+    "isComplete": true,
+    "isTest": false,
+    "status": "completed",
+    "weldEid": "KtHa4IhKyoZO6hbQaQJK",
+    "weldName": "Employee Onboarding",
+    "weldSlug": "employee-onboarding",
+    "documents": [
+      {
+        "type": "application/zip",
+        "url": "https://app.useanvil.com/download/xxx.zip"
+      }
+    ],
+    "submissions": [
+      {
+        "eid": "submission123",
+        "status": "completed"
+      }
+    ],
+    "completedAt": "2026-02-23T14:30:00.000Z"
+  }
+}

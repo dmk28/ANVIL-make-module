@@ -1,0 +1,87 @@
+{
+  "name": "generatePdfFromHtml",
+  "label": "Generate PDF from HTML",
+  "description": "Generate a PDF document from HTML and CSS content",
+  "type": "action",
+  "connection": "anvil",
+  "communication": {
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+      "query": "mutation GeneratePdf($data: GeneratePdfInput!) { generatePdf(data: $data) { file downloadUrl } }",
+      "variables": {
+        "data": {
+          "data": {
+            "html": "{{parameters.html}}",
+            "css": "{{parameters.css}}"
+          },
+          "title": "{{parameters.title}}",
+          "type": "html"
+        }
+      }
+    },
+    "response": {
+      "output": {
+        "file": "{{body.data.generatePdf.file}}",
+        "downloadUrl": "{{body.data.generatePdf.downloadUrl}}",
+        "title": "{{parameters.title}}"
+      },
+      "error": {
+        "message": "{{if(body.errors; body.errors[0].message; 'Failed to generate PDF from HTML')}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.headers.Authorization"
+      ]
+    }
+  },
+  "parameters": [
+    {
+      "name": "html",
+      "label": "HTML Content",
+      "type": "text",
+      "required": true,
+      "help": "HTML content for the PDF. Supports standard HTML tags and inline styles.",
+      "mappable": true
+    },
+    {
+      "name": "css",
+      "label": "CSS Styles",
+      "type": "text",
+      "required": false,
+      "help": "CSS styles to apply to the HTML content",
+      "advanced": true,
+      "mappable": true
+    },
+    {
+      "name": "title",
+      "label": "Document Title",
+      "type": "text",
+      "required": false,
+      "help": "Title for the generated PDF",
+      "mappable": true
+    }
+  ],
+  "interface": [
+    {
+      "name": "file",
+      "label": "PDF File (Base64)",
+      "type": "text"
+    },
+    {
+      "name": "downloadUrl",
+      "label": "Download URL",
+      "type": "url"
+    },
+    {
+      "name": "title",
+      "label": "Document Title",
+      "type": "text"
+    }
+  ]
+}

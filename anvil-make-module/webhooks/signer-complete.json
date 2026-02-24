@@ -1,0 +1,32 @@
+{
+  "name": "signerComplete",
+  "label": "Signer Complete Webhook",
+  "type": "dedicated",
+  "description": "Webhook for individual signer completion events",
+  "communication": {
+    "respond": {
+      "type": "json",
+      "status": 200,
+      "body": {
+        "received": true
+      }
+    },
+    "iterate": {
+      "container": "{{[body.data]}}"
+    },
+    "output": {
+      "signerEid": "{{item.signer.eid}}",
+      "signerName": "{{item.signer.name}}",
+      "signerEmail": "{{item.signer.email}}",
+      "signerStatus": "{{item.signer.status}}",
+      "routingOrder": "{{item.signer.routingOrder}}",
+      "completedAt": "{{item.signer.completedAt}}",
+      "etchPacketId": "{{item.etchPacket.eid}}",
+      "etchPacketName": "{{item.etchPacket.name}}",
+      "etchPacketStatus": "{{item.etchPacket.status}}",
+      "documentGroupId": "{{item.documentGroup.eid}}",
+      "documentGroupStatus": "{{item.documentGroup.status}}",
+      "allSigners": "{{item.etchPacket.signers}}"
+    }
+  }
+}

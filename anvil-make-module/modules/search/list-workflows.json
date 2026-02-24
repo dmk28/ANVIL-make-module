@@ -1,0 +1,120 @@
+{
+  "name": "listWorkflows",
+  "label": "List Workflows",
+  "description": "Retrieve a list of all Workflows (Welds) in your organization.",
+  "type": "search",
+  "connection": "anvil",
+  "communication": {
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+      "query": "query GetOrganizationWelds($limit: Int) { currentUser { organizations { eid name slug welds(limit: $limit) { eid title name slug isArchived createdAt forges { eid name slug } } } } }",
+      "variables": {
+        "limit": "{{parameters.limit}}"
+      }
+    },
+    "response": {
+      "iterate": "{{body.data.currentUser.organizations[0].welds}}",
+      "output": {
+        "eid": "{{item.eid}}",
+        "title": "{{item.title}}",
+        "name": "{{item.name}}",
+        "slug": "{{item.slug}}",
+        "isArchived": "{{item.isArchived}}",
+        "createdAt": "{{item.createdAt}}",
+        "forges": "{{item.forges}}"
+      },
+      "error": {
+        "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to list workflows'))))}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.headers.Authorization"
+      ]
+    }
+  },
+  "parameters": [
+    {
+      "name": "limit",
+      "label": "Limit",
+      "type": "uinteger",
+      "required": false,
+      "default": 50,
+      "help": "Maximum number of workflows to return"
+    }
+  ],
+  "interface": [
+    {
+      "name": "eid",
+      "label": "Workflow ID",
+      "type": "text"
+    },
+    {
+      "name": "title",
+      "label": "Title",
+      "type": "text"
+    },
+    {
+      "name": "name",
+      "label": "Name",
+      "type": "text"
+    },
+    {
+      "name": "slug",
+      "label": "Slug",
+      "type": "text"
+    },
+    {
+      "name": "isArchived",
+      "label": "Is Archived",
+      "type": "boolean"
+    },
+    {
+      "name": "createdAt",
+      "label": "Created At",
+      "type": "date"
+    },
+    {
+      "name": "forges",
+      "label": "Webforms",
+      "type": "array",
+      "spec": {
+        "type": "collection",
+        "spec": [
+          {
+            "name": "eid",
+            "type": "text"
+          },
+          {
+            "name": "name",
+            "type": "text"
+          },
+          {
+            "name": "slug",
+            "type": "text"
+          }
+        ]
+      }
+    }
+  ],
+  "samples": {
+    "eid": "KtHa4IhKyoZO6hbQaQJK",
+    "title": "Employee Onboarding",
+    "name": "employee-onboarding",
+    "slug": "employee-onboarding",
+    "isArchived": false,
+    "createdAt": "2026-01-10T09:00:00.000Z",
+    "forges": [
+      {
+        "eid": "abc123xyz",
+        "name": "Personal Info Form",
+        "slug": "personal-info"
+      }
+    ]
+  }
+}

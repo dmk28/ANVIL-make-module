@@ -1,0 +1,338 @@
+{
+  "name": "createEsignaturePacket",
+  "label": "Create an E-Signature Packet",
+  "description": "Create an e-signature packet (Etch Packet) with PDFs and signers. Optionally send immediately or save as draft.",
+  "type": "action",
+  "connection": "anvil",
+  "communication": {
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+      "query": "mutation CreateEtchPacket($variables: CreateEtchPacketInput!) { createEtchPacket(variables: $variables) { eid name status isTest isDraft createdAt documentGroup { eid status downloadZipURL signers { eid name email status signerType routingOrder } } signers { eid name email status signerType routingOrder } } }",
+      "variables": {
+        "variables": {
+          "name": "{{parameters.packetName}}",
+          "isDraft": "{{parameters.isDraft}}",
+          "isTest": "{{parameters.isTest}}",
+          "signatureEmailSubject": "{{parameters.emailSubject}}",
+          "signatureEmailBody": "{{parameters.emailBody}}",
+          "replyToName": "{{parameters.replyToName}}",
+          "replyToEmail": "{{parameters.replyToEmail}}",
+          "files": "{{parameters.files}}",
+          "data": {
+            "payloads": "{{parameters.fillData}}"
+          },
+          "signers": "{{parameters.signers}}",
+          "signaturePageOptions": "{{parameters.signaturePageOptions}}"
+        }
+      }
+    },
+    "response": {
+      "output": {
+        "packetEid": "{{body.data.createEtchPacket.eid}}",
+        "name": "{{body.data.createEtchPacket.name}}",
+        "status": "{{body.data.createEtchPacket.status}}",
+        "isTest": "{{body.data.createEtchPacket.isTest}}",
+        "isDraft": "{{body.data.createEtchPacket.isDraft}}",
+        "createdAt": "{{body.data.createEtchPacket.createdAt}}",
+        "documentGroup": "{{body.data.createEtchPacket.documentGroup}}",
+        "signers": "{{body.data.createEtchPacket.signers}}"
+      },
+      "error": {
+        "message": "{{if(body.errors; body.errors[0].message; 'Failed to create e-signature packet')}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.headers.Authorization"
+      ]
+    }
+  },
+  "parameters": [
+    {
+      "name": "packetName",
+      "label": "Packet Name",
+      "type": "text",
+      "required": true,
+      "help": "A descriptive name for this signature packet",
+      "mappable": true
+    },
+    {
+      "name": "isDraft",
+      "label": "Save as Draft",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "help": "If true, the packet will be saved as a draft and not sent to signers"
+    },
+    {
+      "name": "isTest",
+      "label": "Test Mode",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "help": "If true, signatures will be demo (not legally binding) and PDFs will be watermarked. Test packets don't count toward your quota."
+    },
+    {
+      "name": "files",
+      "label": "PDF Files",
+      "type": "array",
+      "required": true,
+      "help": "Array of file objects. Each file can reference a template by castEid or upload a new PDF. Example: `[{\"id\": \"file1\", \"castEid\": \"yourTemplateId\"}]`",
+      "mappable": true,
+      "spec": {
+        "type": "collection",
+        "spec": [
+          {
+            "name": "id",
+            "label": "File ID",
+            "type": "text",
+            "required": true,
+            "help": "Unique identifier for this file (used to reference in signers)"
+          },
+          {
+            "name": "castEid",
+            "label": "Template ID",
+            "type": "text",
+            "required": false,
+            "help": "ID of an existing PDF template"
+          },
+          {
+            "name": "filename",
+            "label": "File Name",
+            "type": "text",
+            "required": false,
+            "help": "Custom filename for the generated PDF"
+          },
+          {
+            "name": "title",
+            "label": "Document Title",
+            "type": "text",
+            "required": false,
+            "help": "Title encoded into the PDF document"
+          }
+        ]
+      }
+    },
+    {
+      "name": "signers",
+      "label": "Signers",
+      "type": "array",
+      "required": true,
+      "help": "Array of signer objects. Example: `[{\"id\": \"signer1\", \"name\": \"John Doe\", \"email\": \"john@example.com\", \"signerType\": \"email\", \"fields\": [{\"fileId\": \"file1\", \"fieldId\": \"signature\"}]}]`",
+      "mappable": true,
+      "spec": {
+        "type": "collection",
+        "spec": [
+          {
+            "name": "id",
+            "label": "Signer ID",
+            "type": "text",
+            "required": true,
+            "help": "Unique identifier for this signer"
+          },
+          {
+            "name": "name",
+            "label": "Name",
+            "type": "text",
+            "required": true,
+            "help": "Full name of the signer"
+          },
+          {
+            "name": "email",
+            "label": "Email",
+            "type": "email",
+            "required": true,
+            "help": "Email address of the signer"
+          },
+          {
+            "name": "signerType",
+            "label": "Signer Type",
+            "type": "select",
+            "required": false,
+            "default": "email",
+            "options": [
+              { "label": "Email (Anvil sends email)", "value": "email" },
+              { "label": "Embedded (You control the flow)", "value": "embedded" }
+            ],
+            "help": "How the signer receives the signing link"
+          },
+          {
+            "name": "routingOrder",
+            "label": "Routing Order",
+            "type": "integer",
+            "required": false,
+            "default": 1,
+            "help": "Order in which signers sign (1 = first)"
+          },
+          {
+            "name": "fields",
+            "label": "Signature Fields",
+            "type": "array",
+            "required": true,
+            "help": "Fields this signer must sign",
+            "spec": {
+              "type": "collection",
+              "spec": [
+                {
+                  "name": "fileId",
+                  "label": "File ID",
+                  "type": "text",
+                  "required": true,
+                  "help": "ID of the file containing this field"
+                },
+                {
+                  "name": "fieldId",
+                  "label": "Field ID",
+                  "type": "text",
+                  "required": true,
+                  "help": "ID or alias of the signature field"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "fillData",
+      "label": "Fill Data",
+      "type": "json",
+      "required": false,
+      "help": "JSON object mapping file IDs to fill data. Example: `{\"file1\": {\"data\": {\"name\": \"John\", \"date\": \"2024-01-15\"}}}`",
+      "advanced": true,
+      "mappable": true
+    },
+    {
+      "name": "emailSubject",
+      "label": "Email Subject",
+      "type": "text",
+      "required": false,
+      "help": "Custom subject for signing request emails",
+      "advanced": true,
+      "mappable": true
+    },
+    {
+      "name": "emailBody",
+      "label": "Email Body",
+      "type": "text",
+      "required": false,
+      "help": "Additional text to include in signing request emails",
+      "advanced": true,
+      "mappable": true
+    },
+    {
+      "name": "replyToName",
+      "label": "Reply-To Name",
+      "type": "text",
+      "required": false,
+      "help": "Name shown when signer replies to email",
+      "advanced": true
+    },
+    {
+      "name": "replyToEmail",
+      "label": "Reply-To Email",
+      "type": "email",
+      "required": false,
+      "help": "Email address for replies",
+      "advanced": true
+    },
+    {
+      "name": "signaturePageOptions",
+      "label": "Signature Page Options",
+      "type": "json",
+      "required": false,
+      "help": "JSON object with customization options for the signature page (colors, labels, etc.)",
+      "advanced": true
+    }
+  ],
+  "interface": [
+    {
+      "name": "packetEid",
+      "label": "Packet ID",
+      "type": "text"
+    },
+    {
+      "name": "name",
+      "label": "Packet Name",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "label": "Status",
+      "type": "text"
+    },
+    {
+      "name": "isTest",
+      "label": "Is Test",
+      "type": "boolean"
+    },
+    {
+      "name": "isDraft",
+      "label": "Is Draft",
+      "type": "boolean"
+    },
+    {
+      "name": "createdAt",
+      "label": "Created At",
+      "type": "date"
+    },
+    {
+      "name": "documentGroup",
+      "label": "Document Group",
+      "type": "collection",
+      "spec": [
+        {
+          "name": "eid",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "downloadZipURL",
+          "type": "url"
+        }
+      ]
+    },
+    {
+      "name": "signers",
+      "label": "Signers",
+      "type": "array",
+      "spec": {
+        "type": "collection",
+        "spec": [
+          {
+            "name": "eid",
+            "type": "text"
+          },
+          {
+            "name": "name",
+            "type": "text"
+          },
+          {
+            "name": "email",
+            "type": "email"
+          },
+          {
+            "name": "status",
+            "type": "text"
+          },
+          {
+            "name": "signerType",
+            "type": "text"
+          },
+          {
+            "name": "routingOrder",
+            "type": "integer"
+          }
+        ]
+      }
+    }
+  ]
+}

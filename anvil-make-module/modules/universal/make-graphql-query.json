@@ -1,0 +1,56 @@
+{
+  "name": "makeGraphQLQuery",
+  "label": "Execute GraphQL Query",
+  "description": "Execute a custom GraphQL query or mutation against the Anvil API. Use this for advanced operations not covered by other modules.",
+  "type": "universal",
+  "connection": "anvil",
+  "communication": {
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+      "query": "{{parameters.query}}",
+      "variables": "{{parameters.variables}}"
+    },
+    "response": {
+      "output": "{{body.data}}",
+      "error": {
+        "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'GraphQL query failed'))))}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.headers.Authorization"
+      ]
+    }
+  },
+  "parameters": [
+    {
+      "name": "query",
+      "label": "GraphQL Query",
+      "type": "text",
+      "required": true,
+      "help": "The GraphQL query or mutation string. Example: `query { currentUser { eid email } }`",
+      "mappable": true
+    },
+    {
+      "name": "variables",
+      "label": "Variables",
+      "type": "json",
+      "required": false,
+      "help": "JSON object containing variables for the GraphQL operation",
+      "mappable": true
+    }
+  ],
+  "interface": [
+    {
+      "name": "data",
+      "label": "Response Data",
+      "type": "collection",
+      "spec": []
+    }
+  ]
+}

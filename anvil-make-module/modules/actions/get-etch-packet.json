@@ -1,0 +1,158 @@
+{
+  "name": "getEtchPacket",
+  "label": "Get E-Signature Status",
+  "description": "Retrieve the current status and details of an e-signature packet.",
+  "type": "action",
+  "connection": "anvil",
+  "communication": {
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+      "query": "query GetEtchPacket($eid: String!) { etchPacket(eid: $eid) { eid name status isTest isDraft createdAt updatedAt documentGroup { eid status downloadZipURL } signers { eid name email status signerType routingOrder completedAt } } }",
+      "variables": {
+        "eid": "{{parameters.etchPacketId}}"
+      }
+    },
+    "response": {
+      "output": {
+        "etchPacketId": "{{body.data.etchPacket.eid}}",
+        "name": "{{body.data.etchPacket.name}}",
+        "status": "{{body.data.etchPacket.status}}",
+        "isTest": "{{body.data.etchPacket.isTest}}",
+        "isDraft": "{{body.data.etchPacket.isDraft}}",
+        "createdAt": "{{body.data.etchPacket.createdAt}}",
+        "updatedAt": "{{body.data.etchPacket.updatedAt}}",
+        "isComplete": "{{body.data.etchPacket.status === 'completed'}}",
+        "documentGroup": "{{body.data.etchPacket.documentGroup}}",
+        "signers": "{{body.data.etchPacket.signers}}",
+        "detailsUrl": "https://app.useanvil.com/etch/{{body.data.etchPacket.eid}}"
+      },
+      "error": {
+        "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to get e-signature packet status'))))}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.headers.Authorization"
+      ]
+    }
+  },
+  "parameters": [
+    {
+      "name": "etchPacketId",
+      "label": "E-Signature Packet ID",
+      "type": "text",
+      "required": true,
+      "help": "The EID of the e-signature packet to retrieve",
+      "mappable": true
+    }
+  ],
+  "interface": [
+    {
+      "name": "etchPacketId",
+      "label": "Packet ID",
+      "type": "text"
+    },
+    {
+      "name": "name",
+      "label": "Packet Name",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "label": "Status",
+      "type": "text"
+    },
+    {
+      "name": "isTest",
+      "label": "Is Test",
+      "type": "boolean"
+    },
+    {
+      "name": "isDraft",
+      "label": "Is Draft",
+      "type": "boolean"
+    },
+    {
+      "name": "isComplete",
+      "label": "Is Complete",
+      "type": "boolean"
+    },
+    {
+      "name": "createdAt",
+      "label": "Created At",
+      "type": "date"
+    },
+    {
+      "name": "updatedAt",
+      "label": "Updated At",
+      "type": "date"
+    },
+    {
+      "name": "detailsUrl",
+      "label": "Details URL",
+      "type": "url"
+    },
+    {
+      "name": "documentGroup",
+      "label": "Document Group",
+      "type": "collection",
+      "spec": [
+        {
+          "name": "eid",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "downloadZipURL",
+          "type": "url"
+        }
+      ]
+    },
+    {
+      "name": "signers",
+      "label": "Signers",
+      "type": "array",
+      "spec": {
+        "type": "collection",
+        "spec": [
+          {
+            "name": "eid",
+            "type": "text"
+          },
+          {
+            "name": "name",
+            "type": "text"
+          },
+          {
+            "name": "email",
+            "type": "email"
+          },
+          {
+            "name": "status",
+            "type": "text"
+          },
+          {
+            "name": "signerType",
+            "type": "text"
+          },
+          {
+            "name": "routingOrder",
+            "type": "integer"
+          },
+          {
+            "name": "completedAt",
+            "type": "date"
+          }
+        ]
+      }
+    }
+  ]
+}

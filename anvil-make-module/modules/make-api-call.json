@@ -1,0 +1,114 @@
+{
+  "name": "makeApiCall",
+  "label": "Make an API Call",
+  "description": "Perform an arbitrary API call to the Anvil REST or GraphQL API for advanced operations",
+  "type": "universal",
+  "connection": "anvil",
+  "parameters": [
+    {
+      "name": "endpoint",
+      "label": "Endpoint",
+      "type": "select",
+      "required": true,
+      "default": "rest",
+      "options": [
+        {
+          "label": "REST API (app.useanvil.com/api/v1)",
+          "value": "rest"
+        },
+        {
+          "label": "GraphQL API (graphql.useanvil.com)",
+          "value": "graphql"
+        }
+      ],
+      "help": "Choose which Anvil API endpoint to use"
+    },
+    {
+      "name": "method",
+      "label": "HTTP Method",
+      "type": "select",
+      "required": true,
+      "default": "GET",
+      "options": [
+        {
+          "label": "GET",
+          "value": "GET"
+        },
+        {
+          "label": "POST",
+          "value": "POST"
+        },
+        {
+          "label": "PUT",
+          "value": "PUT"
+        },
+        {
+          "label": "PATCH",
+          "value": "PATCH"
+        },
+        {
+          "label": "DELETE",
+          "value": "DELETE"
+        }
+      ]
+    },
+    {
+      "name": "path",
+      "label": "URL Path",
+      "type": "text",
+      "required": true,
+      "pattern": "^/[a-zA-Z0-9/\\-_{}]+$",
+      "help": "The path to append to the base URL. For REST: `/fill/{templateId}.pdf`. For GraphQL: leave empty or use full URL.",
+      "mappable": true
+    },
+    {
+      "name": "headers",
+      "label": "Headers",
+      "type": "collection",
+      "required": false,
+      "help": "Additional headers to include in the request (key-value pairs)",
+      "advanced": true,
+      "mappable": true
+    },
+    {
+      "name": "queryString",
+      "label": "Query String",
+      "type": "collection",
+      "required": false,
+      "help": "Query parameters as key-value pairs",
+      "advanced": true,
+      "mappable": true
+    },
+    {
+      "name": "body",
+      "label": "Request Body",
+      "type": "json",
+      "required": false,
+      "help": "JSON body for POST/PUT/PATCH requests. For GraphQL, include 'query' and 'variables' keys.",
+      "mappable": true
+    }
+  ],
+  "communication": {
+    "url": "{{if(parameters.endpoint === 'graphql'; 'https://graphql.useanvil.com'; 'https://app.useanvil.com/api/v1' + parameters.path)}}",
+    "method": "{{parameters.method}}",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Basic {{base64(connection.apiKey + ':')}}",
+      "{{each(filter(parameters.headers; header => and(not(equals(lower(header.key); 'authorization')); not(equals(lower(header.key); 'content-type')); not(equals(lower(header.key); 'host')))); header => header.key)}}": "{{header.value}}"
+    },
+    "qs": "{{parameters.queryString}}",
+    "body": "{{parameters.body}}",
+    "response": {
+      "output": "{{body}}",
+      "error": {
+        "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'API request failed'))))}}"
+      }
+    },
+    "log": {
+      "sanitize": [
+        "request.headers.Authorization"
+      ]
+    }
+  },
+  "interface": []
+}
