@@ -1,0 +1,39 @@
+[
+    {
+        "label": "PDF",
+        "modules": [
+            "fillPdfTemplate",
+            "generatePdfHtml",
+            "generatePdfMarkdown",
+            "listPdfTemplates",
+            "getTemplateFields"
+        ]
+    },
+    {
+        "label": "E-Signatures",
+        "modules": [
+            "createEtchPacket",
+            "getEtchPacket",
+            "sendEtchPacket",
+            "generateSignerUrl",
+            "downloadEtchDocuments",
+            "watchEtchComplete",
+            "watchSignerComplete"
+        ]
+    },
+    {
+        "label": "Workflows",
+        "modules": [
+            "createWorkflowSubmission",
+            "getWorkflowData",
+            "listWorkflows",
+            "watchWorkflowComplete"
+        ]
+    },
+    {
+        "label": "Other",
+        "modules": [
+            "makeGraphQLQuery"
+        ]
+    }
+]

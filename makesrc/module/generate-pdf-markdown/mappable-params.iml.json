@@ -1,0 +1,184 @@
+[
+    {
+        "name": "title",
+        "label": "Document Title",
+        "type": "text",
+        "required": false,
+        "help": "Title encoded into the PDF metadata",
+        "mappable": true
+    },
+    {
+        "name": "contentSections",
+        "label": "Content Sections",
+        "type": "array",
+        "required": true,
+        "help": "Array of content sections (labels, content, headings, or tables)",
+        "mappable": true,
+        "spec": {
+            "type": "collection",
+            "spec": [
+                {
+                    "name": "type",
+                    "label": "Section Type",
+                    "type": "select",
+                    "required": true,
+                    "default": "content",
+                    "options": [
+                        { "label": "Content (Markdown)", "value": "content" },
+                        { "label": "Label", "value": "label" },
+                        { "label": "Heading", "value": "heading" },
+                        { "label": "Table", "value": "table" }
+                    ]
+                },
+                {
+                    "name": "label",
+                    "label": "Label Text",
+                    "type": "text",
+                    "required": false,
+                    "help": "Text for label sections"
+                },
+                {
+                    "name": "content",
+                    "label": "Markdown Content",
+                    "type": "text",
+                    "required": false,
+                    "help": "Markdown-formatted text content"
+                },
+                {
+                    "name": "heading",
+                    "label": "Heading Text",
+                    "type": "text",
+                    "required": false,
+                    "help": "Text for heading sections"
+                },
+                {
+                    "name": "tableRows",
+                    "label": "Table Data",
+                    "type": "array",
+                    "required": false,
+                    "help": "Array of row arrays for table data",
+                    "spec": {
+                        "type": "array",
+                        "spec": {
+                            "type": "text"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name": "fontFamily",
+        "label": "Font Family",
+        "type": "select",
+        "required": false,
+        "default": "Roboto",
+        "options": [
+            { "label": "Roboto (Default)", "value": "Roboto" },
+            { "label": "Noto Sans", "value": "Noto Sans" },
+            { "label": "Open Sans", "value": "Open Sans" },
+            { "label": "Lato", "value": "Lato" },
+            { "label": "Helvetica", "value": "Helvetica" }
+        ],
+        "help": "Font family for the PDF",
+        "advanced": true
+    },
+    {
+        "name": "fontSize",
+        "label": "Font Size",
+        "type": "integer",
+        "required": false,
+        "default": 12,
+        "help": "Base font size for the PDF",
+        "advanced": true
+    },
+    {
+        "name": "textColor",
+        "label": "Text Color",
+        "type": "text",
+        "required": false,
+        "default": "#333333",
+        "help": "Hex color code for text (e.g., #333333)",
+        "advanced": true
+    },
+    {
+        "name": "includeTimestamp",
+        "label": "Include Timestamp",
+        "type": "boolean",
+        "required": false,
+        "default": false,
+        "help": "Show generation timestamp at the bottom of the PDF",
+        "advanced": true
+    },
+    {
+        "name": "logoUrl",
+        "label": "Logo URL",
+        "type": "url",
+        "required": false,
+        "help": "URL for a logo image to include",
+        "advanced": true
+    },
+    {
+        "name": "logoMaxWidth",
+        "label": "Logo Max Width",
+        "type": "integer",
+        "required": false,
+        "default": 200,
+        "help": "Maximum width for the logo in pixels",
+        "advanced": true
+    },
+    {
+        "name": "pageWidth",
+        "label": "Page Width",
+        "type": "text",
+        "required": false,
+        "default": "8.5in",
+        "help": "Page width with unit (e.g., '8.5in', '210mm')",
+        "advanced": true
+    },
+    {
+        "name": "pageHeight",
+        "label": "Page Height",
+        "type": "text",
+        "required": false,
+        "default": "11in",
+        "help": "Page height with unit (e.g., '11in', '297mm')",
+        "advanced": true
+    },
+    {
+        "name": "marginTop",
+        "label": "Top Margin",
+        "type": "text",
+        "required": false,
+        "default": "50px",
+        "help": "Top margin with unit",
+        "advanced": true
+    },
+    {
+        "name": "marginBottom",
+        "label": "Bottom Margin",
+        "type": "text",
+        "required": false,
+        "default": "50px",
+        "help": "Bottom margin with unit",
+        "advanced": true
+    },
+    {
+        "name": "marginLeft",
+        "label": "Left Margin",
+        "type": "text",
+        "required": false,
+        "default": "60px",
+        "help": "Left margin with unit",
+        "advanced": true
+    },
+    {
+        "name": "marginRight",
+        "label": "Right Margin",
+        "type": "text",
+        "required": false,
+        "default": "60px",
+        "help": "Right margin with unit",
+        "advanced": true
+    }
+]

@@ -1,0 +1,37 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "query GetEtchPacket($eid: String!) { etchPacket(eid: $eid) { eid name status isTest isDraft createdAt updatedAt documentGroup { eid status downloadZipURL } signers { eid name email status signerType routingOrder completedAt } } }",
+        "variables": {
+            "eid": "{{parameters.etchPacketId}}"
+        }
+    },
+    "response": {
+        "output": {
+            "etchPacketId": "{{body.data.etchPacket.eid}}",
+            "name": "{{body.data.etchPacket.name}}",
+            "status": "{{body.data.etchPacket.status}}",
+            "isTest": "{{body.data.etchPacket.isTest}}",
+            "isDraft": "{{body.data.etchPacket.isDraft}}",
+            "createdAt": "{{body.data.etchPacket.createdAt}}",
+            "updatedAt": "{{body.data.etchPacket.updatedAt}}",
+            "isComplete": "{{body.data.etchPacket.status === 'completed'}}",
+            "documentGroup": "{{body.data.etchPacket.documentGroup}}",
+            "signers": "{{body.data.etchPacket.signers}}",
+            "detailsUrl": "https://app.useanvil.com/etch/{{body.data.etchPacket.eid}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to get e-signature packet status')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

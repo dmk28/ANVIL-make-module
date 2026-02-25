@@ -1,0 +1,439 @@
+{
+    "fileVersion": 1,
+    "generalCodeFiles": {
+        "base": "general/base.iml.json",
+        "common": "general/common.json",
+        "readme": "README.md",
+        "groups": "modules/groups.json"
+    },
+    "components": {
+        "connection": {
+            "anvil": {
+                "label": "Anvil API Key",
+                "connectionType": "basic",
+                "codeFiles": {
+                    "communication": "connection/anvil/communication.iml.json",
+                    "params": "connection/anvil/params.iml.json",
+                    "common": "connection/anvil/common.json"
+                }
+            }
+        },
+        "module": {
+            "fillPdfTemplate": {
+                "label": "Fill a PDF Template",
+                "description": "Fill a PDF template with data and return the filled PDF as a file. The PDF template must be created in Anvil first.",
+                "moduleType": "action",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/fill-pdf-template/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/fill-pdf-template/mappable-params.iml.json",
+                    "interface": "module/fill-pdf-template/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "generatePdfHtml": {
+                "label": "Generate PDF from HTML",
+                "description": "Generate a PDF document from HTML and CSS content.",
+                "moduleType": "action",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/generate-pdf-html/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/generate-pdf-html/mappable-params.iml.json",
+                    "interface": "module/generate-pdf-html/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "generatePdfMarkdown": {
+                "label": "Generate PDF from Markdown",
+                "description": "Generate a PDF document from Markdown content with support for tables, headings, labels, and styled content.",
+                "moduleType": "action",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/generate-pdf-markdown/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/generate-pdf-markdown/mappable-params.iml.json",
+                    "interface": "module/generate-pdf-markdown/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "createEtchPacket": {
+                "label": "Create an E-Signature Packet",
+                "description": "Create an e-signature packet (Etch Packet) with PDFs and signers. Optionally send immediately or save as draft.",
+                "moduleType": "action",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/create-etch-packet/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/create-etch-packet/mappable-params.iml.json",
+                    "interface": "module/create-etch-packet/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "getEtchPacket": {
+                "label": "Get E-Signature Status",
+                "description": "Retrieve the current status and details of an e-signature packet.",
+                "moduleType": "action",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/get-etch-packet/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/get-etch-packet/mappable-params.iml.json",
+                    "interface": "module/get-etch-packet/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "sendEtchPacket": {
+                "label": "Send an E-Signature Packet",
+                "description": "Send a draft e-signature packet to its signers. Only works on packets created with isDraft=true.",
+                "moduleType": "action",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/send-etch-packet/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/send-etch-packet/mappable-params.iml.json",
+                    "interface": "module/send-etch-packet/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "generateSignerUrl": {
+                "label": "Generate Signer URL",
+                "description": "Generate a signing URL for an embedded signer. Use this when you want to control the signing flow in your own application.",
+                "moduleType": "action",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/generate-signer-url/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/generate-signer-url/mappable-params.iml.json",
+                    "interface": "module/generate-signer-url/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "downloadEtchDocuments": {
+                "label": "Download Signed Documents",
+                "description": "Get download URLs for all signed documents from an e-signature packet.",
+                "moduleType": "action",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/download-etch-documents/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/download-etch-documents/mappable-params.iml.json",
+                    "interface": "module/download-etch-documents/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "createWorkflowSubmission": {
+                "label": "Create Workflow Submission",
+                "description": "Start a new workflow submission with data to fill forms and PDFs. Triggers the workflow process in Anvil.",
+                "moduleType": "action",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/create-workflow-submission/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/create-workflow-submission/mappable-params.iml.json",
+                    "interface": "module/create-workflow-submission/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "getWorkflowData": {
+                "label": "Get Workflow Data",
+                "description": "Retrieve data and status from a workflow submission.",
+                "moduleType": "action",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/get-workflow-data/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/get-workflow-data/mappable-params.iml.json",
+                    "interface": "module/get-workflow-data/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "listPdfTemplates": {
+                "label": "List PDF Templates",
+                "description": "Retrieve a list of all PDF templates (Casts) in your organization.",
+                "moduleType": "search",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/list-pdf-templates/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/list-pdf-templates/mappable-params.iml.json",
+                    "interface": "module/list-pdf-templates/interface.iml.json",
+                    "samples": "module/list-pdf-templates/samples.iml.json",
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "getTemplateFields": {
+                "label": "Get Template Fields",
+                "description": "Retrieve all fillable fields from a PDF template. Use this to discover field IDs and aliases for filling PDFs.",
+                "moduleType": "search",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/get-template-fields/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/get-template-fields/mappable-params.iml.json",
+                    "interface": "module/get-template-fields/interface.iml.json",
+                    "samples": "module/get-template-fields/samples.iml.json",
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "listWorkflows": {
+                "label": "List Workflows",
+                "description": "Retrieve a list of all Workflows (Welds) in your organization.",
+                "moduleType": "search",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/list-workflows/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/list-workflows/mappable-params.iml.json",
+                    "interface": "module/list-workflows/interface.iml.json",
+                    "samples": "module/list-workflows/samples.iml.json",
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "watchEtchComplete": {
+                "label": "Watch E-Signature Complete",
+                "description": "Triggers when all signers have completed signing an e-signature packet.",
+                "moduleType": "instant_trigger",
+                "connection": null,
+                "webhook": "etchComplete",
+                "codeFiles": {
+                    "communication": "module/watch-etch-complete/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": null,
+                    "interface": "module/watch-etch-complete/interface.iml.json",
+                    "samples": "module/watch-etch-complete/samples.iml.json",
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "watchSignerComplete": {
+                "label": "Watch Signer Complete",
+                "description": "Triggers when a signer finishes signing their portion of a document.",
+                "moduleType": "instant_trigger",
+                "connection": null,
+                "webhook": "signerComplete",
+                "codeFiles": {
+                    "communication": "module/watch-signer-complete/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": null,
+                    "interface": "module/watch-signer-complete/interface.iml.json",
+                    "samples": "module/watch-signer-complete/samples.iml.json",
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "watchWorkflowComplete": {
+                "label": "Watch Workflow Complete",
+                "description": "Triggers when an entire workflow is completed (all forms filled and signatures collected).",
+                "moduleType": "instant_trigger",
+                "connection": null,
+                "webhook": "workflowComplete",
+                "codeFiles": {
+                    "communication": "module/watch-workflow-complete/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": null,
+                    "interface": "module/watch-workflow-complete/interface.iml.json",
+                    "samples": "module/watch-workflow-complete/samples.iml.json",
+                    "scope": null,
+                    "epoch": null
+                }
+            },
+            "makeGraphQLQuery": {
+                "label": "Execute GraphQL Query",
+                "description": "Execute a custom GraphQL query or mutation against the Anvil API. Use this for advanced operations not covered by other modules.",
+                "moduleType": "universal",
+                "connection": "anvil",
+                "webhook": null,
+                "codeFiles": {
+                    "communication": "module/make-graphql-query/communication.iml.json",
+                    "staticParams": null,
+                    "mappableParams": "module/make-graphql-query/mappable-params.iml.json",
+                    "interface": "module/make-graphql-query/interface.iml.json",
+                    "samples": null,
+                    "scope": null,
+                    "epoch": null
+                }
+            }
+        },
+        "webhook": {
+            "etchComplete": {
+                "label": "E-Signature Complete Webhook",
+                "webhookType": "web",
+                "codeFiles": {
+                    "communication": "webhook/etch-complete/communication.iml.json",
+                    "params": null,
+                    "attach": null,
+                    "detach": null,
+                    "update": null,
+                    "requiredScope": null
+                }
+            },
+            "signerComplete": {
+                "label": "Signer Complete Webhook",
+                "webhookType": "web",
+                "codeFiles": {
+                    "communication": "webhook/signer-complete/communication.iml.json",
+                    "params": null,
+                    "attach": null,
+                    "detach": null,
+                    "update": null,
+                    "requiredScope": null
+                }
+            },
+            "workflowComplete": {
+                "label": "Workflow Complete Webhook",
+                "webhookType": "web",
+                "codeFiles": {
+                    "communication": "webhook/workflow-complete/communication.iml.json",
+                    "params": null,
+                    "attach": null,
+                    "detach": null,
+                    "update": null,
+                    "requiredScope": null
+                }
+            }
+        },
+        "function": {},
+        "rpc": {}
+    },
+    "origins": [
+        {
+            "label": "Origin",
+            "baseUrl": "https://us1.make.com/api",
+            "appId": "anvil-fmek62",
+            "appVersion": 1,
+            "idMapping": {
+                "connection": [
+                    {
+                        "local": "anvil",
+                        "remote": "anvil-fmek62"
+                    }
+                ],
+                "module": [
+                    {
+                        "local": "fillPdfTemplate",
+                        "remote": "fillPdfTemplate"
+                    },
+                    {
+                        "local": "generatePdfHtml",
+                        "remote": "generatePdfHtml"
+                    },
+                    {
+                        "local": "generatePdfMarkdown",
+                        "remote": "generatePdfMarkdown"
+                    },
+                    {
+                        "local": "createEtchPacket",
+                        "remote": "createEtchPacket"
+                    },
+                    {
+                        "local": "getEtchPacket",
+                        "remote": "getEtchPacket"
+                    },
+                    {
+                        "local": "sendEtchPacket",
+                        "remote": "sendEtchPacket"
+                    },
+                    {
+                        "local": "generateSignerUrl",
+                        "remote": "generateSignerUrl"
+                    },
+                    {
+                        "local": "downloadEtchDocuments",
+                        "remote": "downloadEtchDocuments"
+                    },
+                    {
+                        "local": "createWorkflowSubmission",
+                        "remote": "createWorkflowSubmission"
+                    },
+                    {
+                        "local": "getWorkflowData",
+                        "remote": "getWorkflowData"
+                    },
+                    {
+                        "local": "listPdfTemplates",
+                        "remote": "listPdfTemplates"
+                    },
+                    {
+                        "local": "getTemplateFields",
+                        "remote": "getTemplateFields"
+                    },
+                    {
+                        "local": "listWorkflows",
+                        "remote": "listWorkflows"
+                    },
+                    {
+                        "local": "watchEtchComplete",
+                        "remote": "watchEtchComplete"
+                    },
+                    {
+                        "local": "watchSignerComplete",
+                        "remote": "watchSignerComplete"
+                    },
+                    {
+                        "local": "watchWorkflowComplete",
+                        "remote": "watchWorkflowComplete"
+                    },
+                    {
+                        "local": "makeGraphQLQuery",
+                        "remote": "makeGraphQLQuery"
+                    }
+                ],
+                "function": [],
+                "rpc": [],
+                "webhook": [
+                    {
+                        "local": "etchComplete",
+                        "remote": "anvil-fmek62"
+                    },
+                    {
+                        "local": "signerComplete",
+                        "remote": "anvil-fmek622"
+                    },
+                    {
+                        "local": "workflowComplete",
+                        "remote": "anvil-fmek623"
+                    }
+                ]
+            },
+            "apikeyFile": "../.secrets/apikey"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+[
+    {
+        "name": "packetEid",
+        "label": "Packet ID",
+        "type": "text",
+        "required": true,
+        "help": "The EID of the draft e-signature packet to send",
+        "mappable": true
+    }
+]

@@ -1,0 +1,10 @@
+[
+    { "name": "fieldId", "label": "Field ID", "type": "text" },
+    { "name": "label", "label": "Field Label", "type": "text" },
+    { "name": "type", "label": "Field Type", "type": "text" },
+    { "name": "aliasId", "label": "Alias ID", "type": "text" },
+    { "name": "format", "label": "Format", "type": "text" },
+    { "name": "required", "label": "Required", "type": "boolean" },
+    { "name": "templateId", "label": "Template ID", "type": "text" },
+    { "name": "templateName", "label": "Template Name", "type": "text" }
+]

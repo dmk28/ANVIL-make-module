@@ -1,0 +1,27 @@
+[
+    { "name": "signerEid", "label": "Signer ID", "type": "text" },
+    { "name": "signerName", "label": "Signer Name", "type": "text" },
+    { "name": "signerEmail", "label": "Signer Email", "type": "email" },
+    { "name": "signerStatus", "label": "Signer Status", "type": "text" },
+    { "name": "routingOrder", "label": "Routing Order", "type": "integer" },
+    { "name": "completedAt", "label": "Completed At", "type": "date" },
+    { "name": "etchPacketId", "label": "Packet ID", "type": "text" },
+    { "name": "etchPacketName", "label": "Packet Name", "type": "text" },
+    { "name": "etchPacketStatus", "label": "Packet Status", "type": "text" },
+    { "name": "documentGroupId", "label": "Document Group ID", "type": "text" },
+    { "name": "documentGroupStatus", "label": "Document Group Status", "type": "text" },
+    {
+        "name": "allSigners",
+        "label": "All Signers",
+        "type": "array",
+        "spec": {
+            "type": "collection",
+            "spec": [
+                { "name": "name", "type": "text" },
+                { "name": "email", "type": "email" },
+                { "name": "status", "type": "text" },
+                { "name": "routingOrder", "type": "integer" }
+            ]
+        }
+    }
+]

@@ -1,0 +1,32 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "mutation GenerateEtchSignUrl($signerEid: String!, $clientUserId: String!) { generateEtchSignUrl(signerEid: $signerEid, clientUserId: $clientUserId) { url signerToken } }",
+        "variables": {
+            "signerEid": "{{parameters.signerEid}}",
+            "clientUserId": "{{parameters.clientUserId}}"
+        }
+    },
+    "response": {
+        "output": {
+            "signUrl": "{{body.data.generateEtchSignUrl.url}}",
+            "signerToken": "{{body.data.generateEtchSignUrl.signerToken}}",
+            "signerEid": "{{parameters.signerEid}}",
+            "clientUserId": "{{parameters.clientUserId}}",
+            "generatedAt": "{{now}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to generate signer URL')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

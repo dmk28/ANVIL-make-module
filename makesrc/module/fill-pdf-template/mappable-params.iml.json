@@ -1,0 +1,95 @@
+[
+    {
+        "name": "templateId",
+        "label": "PDF Template ID",
+        "type": "text",
+        "required": true,
+        "help": "The ID of the PDF template to fill. Find this in Anvil under your template's API information (e.g., 'kA6Da9CuGqUtc6QiBDRR').",
+        "mappable": true
+    },
+    {
+        "name": "data",
+        "label": "Fill Data",
+        "type": "json",
+        "required": true,
+        "help": "JSON object with field aliases as keys and values to fill. Example: `{\"name\": \"John Doe\", \"email\": \"john@example.com\", \"date\": \"2024-01-15\"}`",
+        "mappable": true
+    },
+    {
+        "name": "title",
+        "label": "Document Title",
+        "type": "text",
+        "required": false,
+        "help": "Title encoded into the PDF document metadata",
+        "advanced": true,
+        "mappable": true
+    },
+    {
+        "name": "outputFileName",
+        "label": "Output File Name",
+        "type": "filename",
+        "required": false,
+        "default": "filled-document.pdf",
+        "help": "Name for the output PDF file",
+        "advanced": true
+    },
+    {
+        "name": "fontFamily",
+        "label": "Font Family",
+        "type": "select",
+        "required": false,
+        "default": "Noto Sans",
+        "options": [
+            { "label": "Noto Sans (Default)", "value": "Noto Sans" },
+            { "label": "Roboto", "value": "Roboto" },
+            { "label": "Open Sans", "value": "Open Sans" },
+            { "label": "Lato", "value": "Lato" },
+            { "label": "Courier", "value": "Courier" },
+            { "label": "Helvetica", "value": "Helvetica" },
+            { "label": "Times New Roman", "value": "Times New Roman" }
+        ],
+        "help": "Font family for filled text fields",
+        "advanced": true
+    },
+    {
+        "name": "fontSize",
+        "label": "Font Size",
+        "type": "integer",
+        "required": false,
+        "default": 10,
+        "help": "Font size for filled text (default: 10)",
+        "advanced": true
+    },
+    {
+        "name": "textColor",
+        "label": "Text Color",
+        "type": "color",
+        "required": false,
+        "default": "#3E3E57",
+        "help": "Hex color code for filled text",
+        "advanced": true
+    },
+    {
+        "name": "alignment",
+        "label": "Text Alignment",
+        "type": "select",
+        "required": false,
+        "default": "left",
+        "options": [
+            { "label": "Left", "value": "left" },
+            { "label": "Center", "value": "center" },
+            { "label": "Right", "value": "right" }
+        ],
+        "help": "Text alignment for filled fields",
+        "advanced": true
+    },
+    {
+        "name": "useInteractiveFields",
+        "label": "Use Interactive Fields",
+        "type": "boolean",
+        "required": false,
+        "default": false,
+        "help": "When enabled, filled fields remain editable in PDF readers",
+        "advanced": true
+    }
+]

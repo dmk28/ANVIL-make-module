@@ -1,0 +1,23 @@
+{
+    "respond": {
+        "type": "json",
+        "status": 200,
+        "body": {
+            "received": true
+        }
+    },
+    "iterate": {
+        "container": "{{[body.data]}}"
+    },
+    "output": {
+        "etchPacketId": "{{item.eid}}",
+        "name": "{{item.name}}",
+        "status": "{{item.status}}",
+        "isTest": "{{item.isTest}}",
+        "downloadZipURL": "{{item.downloadZipURL}}",
+        "documentGroupId": "{{item.documentGroup.eid}}",
+        "documentGroupStatus": "{{item.documentGroup.status}}",
+        "signers": "{{item.signers}}",
+        "completedAt": "{{now}}"
+    }
+}

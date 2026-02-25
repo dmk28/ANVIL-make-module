@@ -1,0 +1,34 @@
+[
+    {
+        "name": "file",
+        "label": "PDF File",
+        "type": "buffer",
+        "semantic": "file:data"
+    },
+    {
+        "name": "fileName",
+        "label": "File Name",
+        "type": "filename",
+        "semantic": "file:name"
+    },
+    {
+        "name": "contentType",
+        "label": "Content Type",
+        "type": "text"
+    },
+    {
+        "name": "templateId",
+        "label": "Template ID",
+        "type": "text"
+    },
+    {
+        "name": "title",
+        "label": "Document Title",
+        "type": "text"
+    },
+    {
+        "name": "filledAt",
+        "label": "Filled At",
+        "type": "date"
+    }
+]

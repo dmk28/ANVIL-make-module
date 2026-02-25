@@ -1,0 +1,34 @@
+[
+    { "name": "weldDataId", "label": "Submission ID", "type": "text" },
+    { "name": "isComplete", "label": "Is Complete", "type": "boolean" },
+    { "name": "isTest", "label": "Is Test", "type": "boolean" },
+    { "name": "status", "label": "Status", "type": "text" },
+    { "name": "weldEid", "label": "Workflow ID", "type": "text" },
+    { "name": "weldName", "label": "Workflow Name", "type": "text" },
+    { "name": "weldSlug", "label": "Workflow Slug", "type": "text" },
+    {
+        "name": "documents",
+        "label": "Documents",
+        "type": "array",
+        "spec": {
+            "type": "collection",
+            "spec": [
+                { "name": "type", "type": "text" },
+                { "name": "url", "type": "url" }
+            ]
+        }
+    },
+    {
+        "name": "submissions",
+        "label": "Submissions",
+        "type": "array",
+        "spec": {
+            "type": "collection",
+            "spec": [
+                { "name": "eid", "type": "text" },
+                { "name": "status", "type": "text" }
+            ]
+        }
+    },
+    { "name": "completedAt", "label": "Completed At", "type": "date" }
+]

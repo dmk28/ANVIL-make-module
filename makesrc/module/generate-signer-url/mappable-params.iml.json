@@ -1,0 +1,18 @@
+[
+    {
+        "name": "signerEid",
+        "label": "Signer ID",
+        "type": "text",
+        "required": true,
+        "help": "The EID of the signer (from Create E-Signature Packet response)",
+        "mappable": true
+    },
+    {
+        "name": "clientUserId",
+        "label": "Client User ID",
+        "type": "text",
+        "required": true,
+        "help": "Your unique identifier for this user session. Used to associate the signing session with your user.",
+        "mappable": true
+    }
+]

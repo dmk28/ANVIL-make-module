@@ -1,0 +1,31 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "query DocumentGroup($eid: String!) { documentGroup(eid: $eid) { eid status downloadZipURL files { eid filename title downloadUrl } } }",
+        "variables": {
+            "eid": "{{parameters.documentGroupEid}}"
+        }
+    },
+    "response": {
+        "output": {
+            "documentGroupEid": "{{body.data.documentGroup.eid}}",
+            "status": "{{body.data.documentGroup.status}}",
+            "downloadZipURL": "{{body.data.documentGroup.downloadZipURL}}",
+            "files": "{{body.data.documentGroup.files}}",
+            "retrievedAt": "{{now}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to get document download URLs')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

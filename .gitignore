@@ -1,0 +1,8 @@
+# Credentials - never commit
+.secrets/
+
+# Claude Code project memory (local only)
+.claude/
+
+# Duplicate/old folder - delete manually after VSCode releases lock
+anvil-make-module/

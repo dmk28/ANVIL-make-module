@@ -1,0 +1,27 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Authorization": "Basic {{base64(parameters.apiKey + ':')}}",
+        "Content-Type": "application/json"
+    },
+    "body": {
+        "query": "{ currentUser { eid email name } }"
+    },
+    "response": {
+        "valid": "{{statusCode === 200 && body.data.currentUser}}",
+        "metadata": {
+            "userEmail": "{{body.data.currentUser.email}}",
+            "userName": "{{body.data.currentUser.name}}",
+            "environment": "{{parameters.environment}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; 'Authentication failed. Please check your API key.')}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

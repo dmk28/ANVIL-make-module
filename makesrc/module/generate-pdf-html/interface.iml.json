@@ -1,0 +1,22 @@
+[
+    {
+        "name": "file",
+        "label": "PDF File (Base64)",
+        "type": "text"
+    },
+    {
+        "name": "downloadUrl",
+        "label": "Download URL",
+        "type": "url"
+    },
+    {
+        "name": "title",
+        "label": "Document Title",
+        "type": "text"
+    },
+    {
+        "name": "generatedAt",
+        "label": "Generated At",
+        "type": "date"
+    }
+]

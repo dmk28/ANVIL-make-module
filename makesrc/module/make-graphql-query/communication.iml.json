@@ -1,0 +1,23 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "{{parameters.query}}",
+        "variables": "{{parameters.variables}}"
+    },
+    "response": {
+        "output": "{{body.data}}",
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'GraphQL query failed')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

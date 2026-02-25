@@ -1,0 +1,34 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "mutation SendEtchPacket($eid: String!) { sendEtchPacket(eid: $eid) { eid name status isDraft createdAt documentGroup { eid status signers { eid name email status } } signers { eid name email status signerType routingOrder } } }",
+        "variables": {
+            "eid": "{{parameters.packetEid}}"
+        }
+    },
+    "response": {
+        "output": {
+            "packetEid": "{{body.data.sendEtchPacket.eid}}",
+            "name": "{{body.data.sendEtchPacket.name}}",
+            "status": "{{body.data.sendEtchPacket.status}}",
+            "isDraft": "{{body.data.sendEtchPacket.isDraft}}",
+            "createdAt": "{{body.data.sendEtchPacket.createdAt}}",
+            "documentGroup": "{{body.data.sendEtchPacket.documentGroup}}",
+            "signers": "{{body.data.sendEtchPacket.signers}}",
+            "sentAt": "{{now}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to send e-signature packet')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

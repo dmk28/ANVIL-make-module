@@ -1,0 +1,45 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "mutation GeneratePdf($data: GeneratePdfInput!) { generatePdf(data: $data) { file downloadUrl } }",
+        "variables": {
+            "data": {
+                "data": {
+                    "html": "{{parameters.html}}",
+                    "css": "{{parameters.css}}"
+                },
+                "title": "{{parameters.title}}",
+                "type": "html",
+                "page": {
+                    "width": "{{parameters.pageWidth}}",
+                    "height": "{{parameters.pageHeight}}",
+                    "marginTop": "{{parameters.marginTop}}",
+                    "marginBottom": "{{parameters.marginBottom}}",
+                    "marginLeft": "{{parameters.marginLeft}}",
+                    "marginRight": "{{parameters.marginRight}}"
+                }
+            }
+        }
+    },
+    "response": {
+        "output": {
+            "file": "{{body.data.generatePdf.file}}",
+            "downloadUrl": "{{body.data.generatePdf.downloadUrl}}",
+            "title": "{{parameters.title}}",
+            "generatedAt": "{{now}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to generate PDF')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

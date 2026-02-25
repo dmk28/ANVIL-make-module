@@ -1,0 +1,22 @@
+{
+    "weldDataId": "GHEJsCVWsR1vtCx3WtUI",
+    "isComplete": true,
+    "isTest": false,
+    "status": "completed",
+    "weldEid": "KtHa4IhKyoZO6hbQaQJK",
+    "weldName": "Employee Onboarding",
+    "weldSlug": "employee-onboarding",
+    "documents": [
+        {
+            "type": "application/zip",
+            "url": "https://app.useanvil.com/download/xxx.zip"
+        }
+    ],
+    "submissions": [
+        {
+            "eid": "submission123",
+            "status": "completed"
+        }
+    ],
+    "completedAt": "2026-02-23T14:30:00.000Z"
+}

@@ -1,0 +1,10 @@
+{
+    "fieldId": "field1",
+    "label": "Employee Name",
+    "type": "fullName",
+    "aliasId": "employeeName",
+    "format": null,
+    "required": true,
+    "templateId": "kA6Da9CuGqUtc6QiBDRR",
+    "templateName": "Employment Agreement"
+}

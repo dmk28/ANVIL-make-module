@@ -1,0 +1,10 @@
+[
+    {
+        "name": "weldDataEid",
+        "label": "Workflow Data ID",
+        "type": "text",
+        "required": true,
+        "help": "The EID of the workflow submission (WeldData)",
+        "mappable": true
+    }
+]

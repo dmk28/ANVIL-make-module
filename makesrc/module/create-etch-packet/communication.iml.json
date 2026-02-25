@@ -1,0 +1,50 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "mutation CreateEtchPacket($variables: CreateEtchPacketInput!) { createEtchPacket(variables: $variables) { eid name status isTest isDraft createdAt documentGroup { eid status downloadZipURL signers { eid name email status signerType routingOrder } } signers { eid name email status signerType routingOrder } } }",
+        "variables": {
+            "variables": {
+                "name": "{{parameters.packetName}}",
+                "isDraft": "{{parameters.isDraft}}",
+                "isTest": "{{parameters.isTest}}",
+                "signatureEmailSubject": "{{parameters.emailSubject}}",
+                "signatureEmailBody": "{{parameters.emailBody}}",
+                "replyToName": "{{parameters.replyToName}}",
+                "replyToEmail": "{{parameters.replyToEmail}}",
+                "files": "{{parameters.files}}",
+                "data": {
+                    "payloads": "{{parameters.fillData}}"
+                },
+                "signers": "{{parameters.signers}}",
+                "signaturePageOptions": "{{parameters.signaturePageOptions}}",
+                "webhookURL": "{{parameters.webhookUrl}}"
+            }
+        }
+    },
+    "response": {
+        "output": {
+            "packetEid": "{{body.data.createEtchPacket.eid}}",
+            "name": "{{body.data.createEtchPacket.name}}",
+            "status": "{{body.data.createEtchPacket.status}}",
+            "isTest": "{{body.data.createEtchPacket.isTest}}",
+            "isDraft": "{{body.data.createEtchPacket.isDraft}}",
+            "createdAt": "{{body.data.createEtchPacket.createdAt}}",
+            "documentGroup": "{{body.data.createEtchPacket.documentGroup}}",
+            "signers": "{{body.data.createEtchPacket.signers}}",
+            "detailsUrl": "https://app.useanvil.com/etch/{{body.data.createEtchPacket.eid}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to create e-signature packet')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

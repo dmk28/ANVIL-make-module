@@ -1,0 +1,33 @@
+[
+    { "name": "packetEid", "label": "Packet ID", "type": "text" },
+    { "name": "name", "label": "Packet Name", "type": "text" },
+    { "name": "status", "label": "Status", "type": "text" },
+    { "name": "isDraft", "label": "Is Draft", "type": "boolean" },
+    { "name": "createdAt", "label": "Created At", "type": "date" },
+    { "name": "sentAt", "label": "Sent At", "type": "date" },
+    {
+        "name": "documentGroup",
+        "label": "Document Group",
+        "type": "collection",
+        "spec": [
+            { "name": "eid", "type": "text" },
+            { "name": "status", "type": "text" }
+        ]
+    },
+    {
+        "name": "signers",
+        "label": "Signers",
+        "type": "array",
+        "spec": {
+            "type": "collection",
+            "spec": [
+                { "name": "eid", "type": "text" },
+                { "name": "name", "type": "text" },
+                { "name": "email", "type": "email" },
+                { "name": "status", "type": "text" },
+                { "name": "signerType", "type": "text" },
+                { "name": "routingOrder", "type": "integer" }
+            ]
+        }
+    }
+]

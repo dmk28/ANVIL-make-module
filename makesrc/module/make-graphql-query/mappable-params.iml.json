@@ -1,0 +1,18 @@
+[
+    {
+        "name": "query",
+        "label": "GraphQL Query",
+        "type": "text",
+        "required": true,
+        "help": "The GraphQL query or mutation string. Example: `query { currentUser { eid email } }`",
+        "mappable": true
+    },
+    {
+        "name": "variables",
+        "label": "Variables",
+        "type": "json",
+        "required": false,
+        "help": "JSON object containing variables for the GraphQL operation",
+        "mappable": true
+    }
+]

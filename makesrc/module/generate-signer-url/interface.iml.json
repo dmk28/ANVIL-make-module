@@ -1,0 +1,7 @@
+[
+    { "name": "signUrl", "label": "Sign URL", "type": "url" },
+    { "name": "signerToken", "label": "Signer Token", "type": "text" },
+    { "name": "signerEid", "label": "Signer ID", "type": "text" },
+    { "name": "clientUserId", "label": "Client User ID", "type": "text" },
+    { "name": "generatedAt", "label": "Generated At", "type": "date" }
+]

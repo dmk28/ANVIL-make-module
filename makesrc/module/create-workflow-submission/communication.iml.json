@@ -1,0 +1,37 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "mutation CreateWeldData($weldEid: String!, $webhookURL: String, $isTest: Boolean, $data: JSONObject) { createWeldData(weldEid: $weldEid, webhookURL: $webhookURL, isTest: $isTest, data: $data) { eid status continueURL isTest weld { eid name slug } submissions { eid status forge { eid name } } documentGroup { eid status } } }",
+        "variables": {
+            "weldEid": "{{parameters.weldEid}}",
+            "webhookURL": "{{parameters.webhookUrl}}",
+            "isTest": "{{parameters.isTest}}",
+            "data": "{{parameters.data}}"
+        }
+    },
+    "response": {
+        "output": {
+            "weldDataId": "{{body.data.createWeldData.eid}}",
+            "status": "{{body.data.createWeldData.status}}",
+            "continueURL": "{{body.data.createWeldData.continueURL}}",
+            "isTest": "{{body.data.createWeldData.isTest}}",
+            "weld": "{{body.data.createWeldData.weld}}",
+            "submissions": "{{body.data.createWeldData.submissions}}",
+            "documentGroup": "{{body.data.createWeldData.documentGroup}}",
+            "createdAt": "{{now}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to create workflow submission')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

@@ -1,0 +1,81 @@
+[
+    {
+        "name": "html",
+        "label": "HTML Content",
+        "type": "text",
+        "required": true,
+        "help": "HTML content for the PDF",
+        "mappable": true
+    },
+    {
+        "name": "css",
+        "label": "CSS Styles",
+        "type": "text",
+        "required": false,
+        "help": "CSS styles to apply to the HTML content",
+        "advanced": true,
+        "mappable": true
+    },
+    {
+        "name": "title",
+        "label": "Document Title",
+        "type": "text",
+        "required": false,
+        "help": "Title for the generated PDF",
+        "mappable": true
+    },
+    {
+        "name": "pageWidth",
+        "label": "Page Width",
+        "type": "text",
+        "required": false,
+        "default": "8.5in",
+        "help": "Page width with unit (e.g., '8.5in', '210mm')",
+        "advanced": true
+    },
+    {
+        "name": "pageHeight",
+        "label": "Page Height",
+        "type": "text",
+        "required": false,
+        "default": "11in",
+        "help": "Page height with unit (e.g., '11in', '297mm')",
+        "advanced": true
+    },
+    {
+        "name": "marginTop",
+        "label": "Top Margin",
+        "type": "text",
+        "required": false,
+        "default": "50px",
+        "help": "Top margin with unit",
+        "advanced": true
+    },
+    {
+        "name": "marginBottom",
+        "label": "Bottom Margin",
+        "type": "text",
+        "required": false,
+        "default": "50px",
+        "help": "Bottom margin with unit",
+        "advanced": true
+    },
+    {
+        "name": "marginLeft",
+        "label": "Left Margin",
+        "type": "text",
+        "required": false,
+        "default": "60px",
+        "help": "Left margin with unit",
+        "advanced": true
+    },
+    {
+        "name": "marginRight",
+        "label": "Right Margin",
+        "type": "text",
+        "required": false,
+        "default": "60px",
+        "help": "Right margin with unit",
+        "advanced": true
+    }
+]

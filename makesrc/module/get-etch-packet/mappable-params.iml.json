@@ -1,0 +1,10 @@
+[
+    {
+        "name": "etchPacketId",
+        "label": "E-Signature Packet ID",
+        "type": "text",
+        "required": true,
+        "help": "The EID of the e-signature packet to retrieve",
+        "mappable": true
+    }
+]

@@ -1,0 +1,8 @@
+[
+    {
+        "name": "data",
+        "label": "Response Data",
+        "type": "collection",
+        "spec": []
+    }
+]

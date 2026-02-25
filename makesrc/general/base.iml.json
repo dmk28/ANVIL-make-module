@@ -1,0 +1,18 @@
+{
+    "baseUrl": "https://app.useanvil.com/api/v1",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "response": {
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Request failed')))}}",
+            "type": "{{if(statusCode === 401; 'AuthenticationError'; if(statusCode === 403; 'AuthorizationError'; if(statusCode === 429; 'RateLimitError'; if(statusCode >= 500; 'ConnectionError'; 'DataError'))))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

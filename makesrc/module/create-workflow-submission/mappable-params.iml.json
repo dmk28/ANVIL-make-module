@@ -1,0 +1,35 @@
+[
+    {
+        "name": "weldEid",
+        "label": "Workflow ID",
+        "type": "text",
+        "required": true,
+        "help": "The EID of the workflow (Weld) to start. Find this in Anvil under your workflow's settings.",
+        "mappable": true
+    },
+    {
+        "name": "data",
+        "label": "Workflow Data",
+        "type": "json",
+        "required": false,
+        "help": "JSON object with data to fill the workflow forms. Keys should match field aliases in your workflow.",
+        "mappable": true
+    },
+    {
+        "name": "isTest",
+        "label": "Test Mode",
+        "type": "boolean",
+        "required": false,
+        "default": false,
+        "help": "If true, creates a test submission that doesn't count toward quotas"
+    },
+    {
+        "name": "webhookUrl",
+        "label": "Webhook URL",
+        "type": "url",
+        "required": false,
+        "help": "URL to receive webhook notifications when the workflow completes",
+        "advanced": true,
+        "mappable": true
+    }
+]

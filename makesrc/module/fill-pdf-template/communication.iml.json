@@ -1,0 +1,35 @@
+{
+    "url": "/fill/{{parameters.templateId}}.pdf",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/pdf"
+    },
+    "body": {
+        "title": "{{parameters.title}}",
+        "fontFamily": "{{parameters.fontFamily}}",
+        "fontSize": "{{parameters.fontSize}}",
+        "textColor": "{{parameters.textColor}}",
+        "alignment": "{{parameters.alignment}}",
+        "useInteractiveFields": "{{parameters.useInteractiveFields}}",
+        "data": "{{parameters.data}}"
+    },
+    "response": {
+        "output": {
+            "file": "{{body}}",
+            "fileName": "{{if(parameters.outputFileName; parameters.outputFileName; 'filled-document.pdf')}}",
+            "contentType": "application/pdf",
+            "templateId": "{{parameters.templateId}}",
+            "title": "{{parameters.title}}",
+            "filledAt": "{{now}}"
+        },
+        "error": {
+            "message": "{{if(body.name === 'ValidationError'; 'Validation Error: ' + body.fields[0].message; if(body.message; body.message; 'Failed to fill PDF template'))}}"
+        }
+    },
+    "options": {
+        "response": {
+            "encoding": "buffer"
+        }
+    }
+}

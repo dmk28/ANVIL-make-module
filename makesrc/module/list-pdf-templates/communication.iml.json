@@ -1,0 +1,33 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "query GetOrganizationCasts($limit: Int) { currentUser { organizations { eid name slug casts(limit: $limit) { eid name createdAt updatedAt isArchived versionNumber } } } }",
+        "variables": {
+            "limit": "{{parameters.limit}}"
+        }
+    },
+    "response": {
+        "iterate": "{{body.data.currentUser.organizations[0].casts}}",
+        "output": {
+            "eid": "{{item.eid}}",
+            "name": "{{item.name}}",
+            "createdAt": "{{item.createdAt}}",
+            "updatedAt": "{{item.updatedAt}}",
+            "isArchived": "{{item.isArchived}}",
+            "versionNumber": "{{item.versionNumber}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to list PDF templates')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

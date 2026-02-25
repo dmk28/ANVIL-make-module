@@ -1,0 +1,15 @@
+{
+    "eid": "KtHa4IhKyoZO6hbQaQJK",
+    "title": "Employee Onboarding",
+    "name": "employee-onboarding",
+    "slug": "employee-onboarding",
+    "isArchived": false,
+    "createdAt": "2026-01-10T09:00:00.000Z",
+    "forges": [
+        {
+            "eid": "abc123xyz",
+            "name": "Personal Info Form",
+            "slug": "personal-info"
+        }
+    ]
+}

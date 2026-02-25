@@ -1,0 +1,36 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "query WeldData($eid: String!) { weldData(eid: $eid) { eid isTest status continueURL displayTitle numberRemainingSigners dataUpdatedAt submissions { eid status resolvedPayload forge { eid name slug } } documentGroup { eid status downloadZipURL currentRoutingStep signers { eid status name email routingOrder } } } }",
+        "variables": {
+            "eid": "{{parameters.weldDataEid}}"
+        }
+    },
+    "response": {
+        "output": {
+            "weldDataEid": "{{body.data.weldData.eid}}",
+            "isTest": "{{body.data.weldData.isTest}}",
+            "status": "{{body.data.weldData.status}}",
+            "continueURL": "{{body.data.weldData.continueURL}}",
+            "displayTitle": "{{body.data.weldData.displayTitle}}",
+            "numberRemainingSigners": "{{body.data.weldData.numberRemainingSigners}}",
+            "dataUpdatedAt": "{{body.data.weldData.dataUpdatedAt}}",
+            "submissions": "{{body.data.weldData.submissions}}",
+            "documentGroup": "{{body.data.weldData.documentGroup}}",
+            "retrievedAt": "{{now}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to get workflow data')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

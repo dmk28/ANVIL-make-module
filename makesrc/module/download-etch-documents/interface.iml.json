@@ -1,0 +1,20 @@
+[
+    { "name": "documentGroupEid", "label": "Document Group ID", "type": "text" },
+    { "name": "status", "label": "Status", "type": "text" },
+    { "name": "downloadZipURL", "label": "Download ZIP URL", "type": "url" },
+    { "name": "retrievedAt", "label": "Retrieved At", "type": "date" },
+    {
+        "name": "files",
+        "label": "Files",
+        "type": "array",
+        "spec": {
+            "type": "collection",
+            "spec": [
+                { "name": "eid", "label": "File ID", "type": "text" },
+                { "name": "filename", "label": "Filename", "type": "text" },
+                { "name": "title", "label": "Title", "type": "text" },
+                { "name": "downloadUrl", "label": "Download URL", "type": "url" }
+            ]
+        }
+    }
+]

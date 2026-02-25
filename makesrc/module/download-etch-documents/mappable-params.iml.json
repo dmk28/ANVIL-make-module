@@ -1,0 +1,10 @@
+[
+    {
+        "name": "documentGroupEid",
+        "label": "Document Group ID",
+        "type": "text",
+        "required": true,
+        "help": "The EID of the DocumentGroup (from Create E-Signature Packet response)",
+        "mappable": true
+    }
+]

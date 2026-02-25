@@ -1,0 +1,27 @@
+{
+    "signerEid": "0ZTRyrIlfcYsAo6A95Qk",
+    "signerName": "John Doe",
+    "signerEmail": "john@example.com",
+    "signerStatus": "completed",
+    "routingOrder": 1,
+    "completedAt": "2026-02-23T14:30:00.000Z",
+    "etchPacketId": "DEtCx3WtJsCIVWGsR1vU",
+    "etchPacketName": "Employment Agreement",
+    "etchPacketStatus": "partial",
+    "documentGroupId": "8jJ9yrIlfcYsAo6A95Qk",
+    "documentGroupStatus": "partial",
+    "allSigners": [
+        {
+            "name": "John Doe",
+            "email": "john@example.com",
+            "status": "completed",
+            "routingOrder": 1
+        },
+        {
+            "name": "Jane Smith",
+            "email": "jane@example.com",
+            "status": "pending",
+            "routingOrder": 2
+        }
+    ]
+}

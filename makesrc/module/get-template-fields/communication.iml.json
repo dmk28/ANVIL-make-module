@@ -1,0 +1,35 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "query GetCast($eid: String!) { cast(eid: $eid) { eid name createdAt updatedAt isArchived versionNumber fields { id label type aliasId format required } } }",
+        "variables": {
+            "eid": "{{parameters.templateId}}"
+        }
+    },
+    "response": {
+        "iterate": "{{body.data.cast.fields}}",
+        "output": {
+            "fieldId": "{{item.id}}",
+            "label": "{{item.label}}",
+            "type": "{{item.type}}",
+            "aliasId": "{{item.aliasId}}",
+            "format": "{{item.format}}",
+            "required": "{{item.required}}",
+            "templateId": "{{body.data.cast.eid}}",
+            "templateName": "{{body.data.cast.name}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Failed to get template fields')))}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

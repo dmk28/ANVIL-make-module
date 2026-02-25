@@ -1,0 +1,28 @@
+[
+    {
+        "name": "apiKey",
+        "type": "password",
+        "label": "API Key",
+        "required": true,
+        "help": "Your Anvil API key. Find it at Organization Settings > API Settings. Use production key for live data or development key for testing.",
+        "editable": true
+    },
+    {
+        "name": "environment",
+        "type": "select",
+        "label": "Environment",
+        "required": true,
+        "default": "production",
+        "options": [
+            {
+                "label": "Production",
+                "value": "production"
+            },
+            {
+                "label": "Development",
+                "value": "development"
+            }
+        ],
+        "help": "Production key for live data, Development key for testing (watermarked PDFs, stricter rate limits)"
+    }
+]

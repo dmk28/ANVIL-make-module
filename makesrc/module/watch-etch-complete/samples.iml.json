@@ -1,0 +1,19 @@
+{
+    "etchPacketId": "DEtCx3WtJsCIVWGsR1vU",
+    "name": "Employment Agreement",
+    "status": "completed",
+    "isTest": false,
+    "downloadZipURL": "https://app.useanvil.com/api/document-group/xxx.zip",
+    "documentGroupId": "FhrKzFgrN5vZ4mwzy",
+    "documentGroupStatus": "completed",
+    "signers": [
+        {
+            "name": "John Doe",
+            "email": "john@example.com",
+            "eid": "wAoklfcF67rI6A95Q7Yh",
+            "status": "completed",
+            "routingOrder": 1
+        }
+    ],
+    "completedAt": "2026-02-23T14:30:00.000Z"
+}
