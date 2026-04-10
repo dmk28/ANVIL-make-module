@@ -435,11 +435,11 @@
                 "rpc": [
                     {
                         "local": "listCasts",
-                        "remote": "listCasts"
+                        "remote": null
                     },
                     {
                         "local": "listWelds",
-                        "remote": "listWelds"
+                        "remote": null
                     }
                 ],
                 "webhook": [
