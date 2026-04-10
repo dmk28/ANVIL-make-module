@@ -1,10 +1,12 @@
 [
     {
         "name": "templateId",
-        "label": "PDF Template ID",
-        "type": "text",
+        "label": "PDF Template",
+        "type": "select",
         "required": true,
-        "help": "The EID of the PDF template (Cast) to retrieve fields from",
+        "options": "rpc://listCasts",
+        "editable": true,
+        "help": "Select a PDF template or map an ID from a previous module.",
         "mappable": true
     }
 ]

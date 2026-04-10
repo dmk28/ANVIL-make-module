@@ -1,10 +1,12 @@
 [
     {
         "name": "weldEid",
-        "label": "Workflow ID",
-        "type": "text",
+        "label": "Workflow",
+        "type": "select",
         "required": true,
-        "help": "The EID of the workflow (Weld) to start. Find this in Anvil under your workflow's settings.",
+        "options": "rpc://listWelds",
+        "editable": true,
+        "help": "Select a workflow or map an ID from a previous module.",
         "mappable": true
     },
     {

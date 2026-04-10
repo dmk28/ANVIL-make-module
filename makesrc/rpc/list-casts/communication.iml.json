@@ -1,0 +1,26 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "query { currentUser { organizations { casts(limit: 100) { eid name isArchived } } } }"
+    },
+    "response": {
+        "iterate": "{{body.data.currentUser.organizations[0].casts}}",
+        "output": {
+            "label": "{{item.name}}",
+            "value": "{{item.eid}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; 'Failed to load templates')}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

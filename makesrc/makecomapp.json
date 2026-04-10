@@ -331,7 +331,22 @@
             }
         },
         "function": {},
-        "rpc": {}
+        "rpc": {
+            "listCasts": {
+                "label": "List PDF Templates",
+                "connection": "anvil",
+                "codeFiles": {
+                    "communication": "rpc/list-casts/communication.iml.json"
+                }
+            },
+            "listWelds": {
+                "label": "List Workflows",
+                "connection": "anvil",
+                "codeFiles": {
+                    "communication": "rpc/list-welds/communication.iml.json"
+                }
+            }
+        }
     },
     "origins": [
         {
@@ -417,7 +432,16 @@
                     }
                 ],
                 "function": [],
-                "rpc": [],
+                "rpc": [
+                    {
+                        "local": "listCasts",
+                        "remote": "listCasts"
+                    },
+                    {
+                        "local": "listWelds",
+                        "remote": "listWelds"
+                    }
+                ],
                 "webhook": [
                     {
                         "local": "etchComplete",

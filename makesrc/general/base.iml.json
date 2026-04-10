@@ -7,7 +7,7 @@
     "response": {
         "error": {
             "message": "{{if(body.errors; body.errors[0].message; if(body.error; body.error; if(body.message; body.message; 'Request failed')))}}",
-            "type": "{{if(statusCode === 401; 'AuthenticationError'; if(statusCode === 403; 'AuthorizationError'; if(statusCode === 429; 'RateLimitError'; if(statusCode >= 500; 'ConnectionError'; 'DataError'))))}}"
+            "type": "{{if(statusCode === 401; 'InvalidAccessTokenError'; if(statusCode === 403; 'InvalidAccessTokenError'; if(statusCode === 429; 'RateLimitError'; if(statusCode >= 500; 'ConnectionError'; 'DataError'))))}}"
         }
     },
     "log": {

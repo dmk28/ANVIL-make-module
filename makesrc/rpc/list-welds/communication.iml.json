@@ -1,0 +1,26 @@
+{
+    "url": "https://graphql.useanvil.com",
+    "method": "POST",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic {{base64(connection.apiKey + ':')}}"
+    },
+    "body": {
+        "query": "query { currentUser { organizations { welds(limit: 100) { eid title name isArchived } } } }"
+    },
+    "response": {
+        "iterate": "{{body.data.currentUser.organizations[0].welds}}",
+        "output": {
+            "label": "{{item.title || item.name}}",
+            "value": "{{item.eid}}"
+        },
+        "error": {
+            "message": "{{if(body.errors; body.errors[0].message; 'Failed to load workflows')}}"
+        }
+    },
+    "log": {
+        "sanitize": [
+            "request.headers.Authorization"
+        ]
+    }
+}

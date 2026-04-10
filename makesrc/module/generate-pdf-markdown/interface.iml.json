@@ -1,13 +1,20 @@
 [
     {
         "name": "file",
-        "label": "PDF File (Base64)",
-        "type": "text"
+        "label": "PDF File",
+        "type": "buffer",
+        "semantic": "file:data"
     },
     {
-        "name": "downloadUrl",
-        "label": "Download URL",
-        "type": "url"
+        "name": "fileName",
+        "label": "File Name",
+        "type": "filename",
+        "semantic": "file:name"
+    },
+    {
+        "name": "contentType",
+        "label": "Content Type",
+        "type": "text"
     },
     {
         "name": "title",
